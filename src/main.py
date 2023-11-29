@@ -1,14 +1,28 @@
+from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
+from assistant import process_question, read_bible_text
+from utils import speak
 
-from assistant import read_bible_text, process_question
-from utils import listen_to_user_input, speak
+app = Flask(__name__)
+CORS(app)
 
-def main():
-    bible_text = read_bible_text()
-    user_input = listen_to_user_input()
-    spoken_response = process_question(user_input, bible_text)
+# Assuming you have loaded the bible text
+bible_text = read_bible_text('bible.txt')
 
-    print(spoken_response)  # Print the response to the console
-    speak(spoken_response)  # Speak the response
+@app.route('/')
+def home():
+    return render_template('index.html', message='Welcome to Mana One!')
 
-if __name__ == "__main__":
-    main()
+@app.route('/ask', methods=['POST'])
+def ask():
+    try:
+        data = request.get_json()
+        question = data['question']
+        response = process_question(question, bible_text)
+        speak(response['answer'])  # Speaking only the answer
+        return jsonify(response)
+    except Exception as e:
+        return jsonify(answer=f"Error: {str(e)}")
+
+if __name__ == '__main__':
+    app.run(debug=True)
