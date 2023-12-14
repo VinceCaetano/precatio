@@ -6,9 +6,9 @@ from utils import speak
 app = Flask(__name__)
 CORS(app)
 
-# Assuming you have loaded the bible text
 bible_text = read_bible_text('bible.txt')
 
+## flask p redenizar o template html
 @app.route('/')
 def home():
     return render_template('index.html', message='Welcome to Mana One!')
@@ -19,7 +19,7 @@ def ask():
         data = request.get_json()
         question = data['question']
         response = process_question(question, bible_text)
-        speak(response['answer'])  # Speaking only the answer
+        speak(response['answer'])  
         return jsonify(response)
     except Exception as e:
         return jsonify(answer=f"Error: {str(e)}")

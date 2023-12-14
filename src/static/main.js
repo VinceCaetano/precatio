@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
             displayUserMessage(question);
             sendToBackend(question);
 
-            // Clear the input field after sending the question
             questionInput.value = '';
         }
     });
