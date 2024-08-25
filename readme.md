@@ -1,4 +1,4 @@
-# mana_one: Your Bible Question Answering AI
+# Precatio: Your Bible Question Answering AI
 
 "mana_one" is an AI dedicated to providing insightful and accurate answers to your questions related to the Bible. Our AI is designed to assist you in understanding biblical passages, interpreting teachings, and exploring the historical context of the scriptures.
 
